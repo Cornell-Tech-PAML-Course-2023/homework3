@@ -21,7 +21,7 @@ The <b>learning outcomes</b> for this assignment are:
 * Assignment Type: Individual
 * Time Estimate: 18 Hours
 * What to turn in: Submit responses on GitHub AutoGrader and Canvas Reflection Assessment 3
-* Join Github Classroom: https://classroom.github.com/a/4E0vXSSt (11 points)
+* Join Github Classroom: [TODO: Add invitation link] (11 points)
 * Submit Reflection Assessment via Canvas (8 multiple choice questions)
 
 ## Assignment Outline
@@ -37,7 +37,7 @@ The <b>learning outcomes</b> for this assignment are:
 # Computing Prerequisites
 
 * [Optional] Revisit the [Preliminaries Github repository](https://github.com/Cornell-Tech-PAML-Course/0-paml-preliminaries) if you have not set up your computing environment. 
-* Clone Homework 3 Github using the [Github Autograder Invitation Link](https://classroom.github.com/a/4E0vXSSt).
+* Clone Homework 3 Github using the [Github Autograder Invitation Link](TODO).
 * Update conda on your machine. Open a terminal window with your conda environment activated and run:
 ```
 conda update conda

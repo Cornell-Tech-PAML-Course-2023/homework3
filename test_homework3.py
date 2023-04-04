@@ -102,22 +102,20 @@ def test_train_logistic_regression():
               'penalty': 'l1', 'tol': 0.01, "solver": "liblinear"}
     student_lr = B_Train_Model.train_logistic_regression(
         X_train, y_train, 'Logistic Regression', params)
-    print("X_val")
-    print(X_val)
-    print(X_val.shape)
+
     student_pred = student_lr.predict_proba(X_val)
     assert np.allclose(student_pred,
-                       np.array([[0.00016352706572797526, 0.999836472934272],
-                                 [0.0002945103639715452, 0.9997054896360285],
-                                 [0.0006579254171259485, 0.999342074582874],
-                                 [0.0019660625681305888, 0.9980339374318694],
-                                 [0.0000403705235358931, 0.9999596294764641],
-                                 [0.00002846375862808337, 0.9999715362413719],
-                                 [0.000002040863270380555, 0.9999979591367296],
-                                 [0.0021201298001957136, 0.9978798701998043],
-                                 [0.0017711212671136511, 0.9982288787328863],
-                                 [0.0014121498053091264, 0.9985878501946909],
-                                 [0.0012293794599320673, 0.9987706205400679]]))
+                       np.array([[0.00033509657359, 0.99966490342641],
+                                 [0.00006836217688, 0.99993163782312],
+                                 [0.06983473692013, 0.93016526307987],
+                                 [0.97433884386458, 0.02566115613542],
+                                 [0.02602010321553, 0.97397989678447],
+                                 [0.00001989392376, 0.99998010607624],
+                                 [0.00159098063393, 0.99840901936607],
+                                 [0.00536366659173, 0.99463633340827],
+                                 [0.00047812840791, 0.99952187159209],
+                                 [0.00011844250899, 0.99988155749101],
+                                 [0.04846528969827, 0.95153471030173]]))
 
 
 # Checkpoint 6
@@ -132,14 +130,14 @@ def test_train_sgd_classifier():
                        np.array([[0, 1.00000000e+00],
                                  [0, 1.00000000e+00],
                                  [0, 1],
+                                 [0.99914037981499, 0.00085962018501],
                                  [0, 1],
                                  [0, 1],
                                  [0, 1],
                                  [0, 1],
                                  [0, 1],
                                  [0, 1],
-                                 [0, 1],
-                                 [0, 1]]))
+                                 [0.00038083151739, 0.99961916848261]]))
 
 
 # Checkpoint 7
@@ -212,9 +210,9 @@ def test_metrics():
     student_metrics = C_Test_Model.compute_eval_metrics(
         X_train, y_train, student_lr, ['precision', 'recall', 'accuracy'])
 
-    assert np.allclose(student_metrics['precision'], 0.9289827255278311)
+    assert np.allclose(student_metrics['precision'], 0.9847405900305188)
     assert np.allclose(student_metrics['recall'], 1.0)
-    assert np.allclose(student_metrics['accuracy'], 0.9289827255278311)
+    assert np.allclose(student_metrics['accuracy'], 0.9856046065259118)
 
 
 # Checkpoint 11
@@ -234,7 +232,7 @@ def test_plot_roc_curve():
     _, student_roc_df = C_Test_Model.plot_roc_curve(
         X_train, X_val, y_train, y_val, [student_lr, student_sgd], ['Logistic Regression', 'Stochastic Gradient Descent'])
 
-    expected_roc_df = pd.read_pickle("./test_files/roc_dict.pkl")
+    expected_roc_df = pd.read_pickle('./test_files/roc_dict.pkl')
     pd.testing.assert_frame_equal(student_roc_df, expected_roc_df)
 
 
