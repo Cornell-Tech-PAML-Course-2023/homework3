@@ -17,7 +17,7 @@ The <b>learning outcomes</b> for this assignment are:
 * Develop a web application that classifies products as positive or negative and indicates the cost of displaying false positives and false negatives using a specified model.
 
 # Assignment Deadline:
-* Due:  Monday April 17, 2023 at 11:00PM 
+* Due:  Monday April 24, 2023 at 11:00PM 
 * Assignment Type: Individual
 * Time Estimate: 18 Hours
 * What to turn in: Submit responses on GitHub AutoGrader and Canvas Reflection Assessment 3
@@ -156,28 +156,19 @@ sgd_model = SGDClassifier( random_state=random_state, **params)
 
 Perform the following tasks in the train_sgdcv_classifer function:
 * Create a try and except block to train a logistic regression model with Stochastic Gradient Descent algorithm with Repeated K-Fold Cross Validation and search for the optimal parameters with gridsearch.
-* Create a SGDClassifier class object using the random_state and params as input.
+* Find the optimal hyperparameters using GridSearchCV with SGDClassifier as the estimator.
 ```
-sgd_model = SGDClassifier(max_iter=params['max_iter'], 
-                            tol=params['tol'], 
-                            penalty=params['penalty'][0], 
-                            alpha=params['alpha'], 
-                            loss=params['loss'], 
-                            random_state=random_state)
+sgd_cv_model = GridSearchCV(estimator=SGDClassifier(random_state=random_state), 
+param_grid=params, cv=cv_params['n_splits'])
 ```
-* Create a RepeatedKFold object with random_state and cv_params 
-	```
-	sgd_cv = RepeatedKFold(n_splits=cv_params['n_splits'], 
-                          n_repeats = cv_params['n_repeats'], 
-                                               random_state=random_state)
-	```
-* Define sgd_results variable using cross_validate object with parameters: sgd_model, X_train, y_train, scoring='accuracy', cv=sgd_cv, n_jobs=-1, return_estimator=True
-* Define best_model_idx as the index with the minimum score (np.argmin) in sgd_results['test_score']
+* Fit the model to data using the fit() function
+* Save the cross validation results (sgd_cv_model.cv_results_) in st.session_state[‘cv_results_’].
+* Save the best model estimator in st.session_state[model_name]. 
 ```
-best_model_idx = np.argmin(...)
+st.session_state[model_name] = sgd_cv_model.best_estimator_
 ```
-* Save the model in sgd_results['estimator'] with the best score at index best_model_idx
-* Save the best model in st.session_state[model_name]. 
+Return the best model estimator 
+
 
 <b>Checkpoint 8</b>: train_majority_classifer(X_train, y_train, model_name) 
 
